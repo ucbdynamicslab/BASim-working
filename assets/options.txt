@@ -1,0 +1,88 @@
+#static friction, updated normal
+
+# Conveyor belt speed: 0.05 to 10 cm/s
+# Injection speed: 0.05 to 25 cm/s
+# Current falling height sets at 68 cm
+# Radius of the rope: 1.58 mm or 3.17 mm
+# Young modulus of the rope: 2 or 11 or 25 MPa
+
+# contact-method for rod - belt
+# 0 - do nothing
+# 1 - fixing y dimension
+# 2 - applying a force
+# 3 - inelastic impulse after dynamic
+# 4 - instant freezing vertex and edge
+contact-method 2
+
+# friction-method
+# 0 - no friction
+# 1 - implicit damping friction, -cv
+# 2 - (1) + coulomb limit
+# 3 - (1) + material frame friction
+# 4 - damping friction + coulomb limit on position and twisting angle (sliding + rolling)
+# 5 - Coulomb's friction. static friction <= static cof * normal, kinetic = kinetic cof * normal
+# 6 - Coulomb's friction. static friction <= static cof * normal, no dynamic condition
+# 7 - Coulomb's friction. static friction = static cof * normal. if less than coulomb's limit, fix
+# 8 - Coulomb's friction after dynamic integration. static friction <= static cof * normal, kinetic = kinetic cof * normal
+friction-method 7
+
+# Coulomb's friction
+coulomb-static 0.81
+coulomb-kinetic 0.81
+
+density 1.186237
+
+natural-curvature 0.00
+
+fall-height 50
+belt-speed -1.0
+nozzle-speed 1.02
+
+
+fft-window-size 20000
+fft-interval 2000
+
+youngs-modulus 13.0e6
+shear-modulus 4.167e6
+
+major-radius 0.1605
+minor-radius 0.1605
+
+rod-length 1.0 # cm
+nv 4
+
+bctest false
+
+head-vertices 3
+
+penalty-collision false
+original-freeze false
+
+radius-scale 1.0
+
+viscosity 0
+gravity 0 -981 0
+
+jitter-amplitude 1.0
+jitter-frequency 1.0
+
+cutting-point 500.0
+
+mass-damping 0.0
+integrator implicit
+iterations 1000
+dt 0.05
+
+fps 5
+window-height 480
+window-width 640
+
+quasistatic false
+viscosity 0
+
+use-curved-nozzle false
+floor-bc-fix-twist true
+floor-bc-fix-twist-alpha 5
+
+fix-twist-after-hit false
+
