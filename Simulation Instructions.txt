@@ -1,0 +1,33 @@
+This document provides instructions on how to use this software to launch 
+Elastic Sewing Machine simulations. For compiling the software please refer
+to "Building Instructions.txt".
+
+
+
+=== Running with option file ===
+
+The following command launches the program with a specified option file:
+
+BASimulator -r 1 -f options.txt
+
+
+
+=== Running with manually specified options ===
+
+The following syntax can be used to manually specify the value of certain 
+parameters to override that in the option file:
+
+BASimulator -r 1 -f options.txt -- dt 0.01
+
+
+
+=== Scripts  ===
+
+The scripts for producing data plotted in the paper (Coiling of Elastic Rods
+on Rigid Substrates, Jawed et al., 2014, PNAS) are also included with the
+code, in the scripts directory.
+
+
+
+
+
