@@ -1,0 +1,28 @@
+natural-curvature 40	# Natural curvature of the rod
+natural-curvature-switch 80 # Second natural curvature of the rod
+switch-time 5.0 # switch time
+
+nv 50	# number of vertices in the rod
+dt 0.001	# time-step size
+length 0.5	# length of rod
+major-radius 0.001605	# radius of major axis of cross-section
+minor-radius 0.001605	# radius of minor axis of cross-section
+density 1200.0	# volumetric density of the rod
+mass-damping 20.0	# mass damping for the rod
+radius-scale 1	# scaling for rendering and collisions
+shear-modulus 0.4167e+6	# Shear modulus for the rod
+youngs-modulus 1.3e+6	# Young's modulus for the rod
+gravity 0 0 9.81	# gravity
+fps 25 # frame per second
+
+# Change the values below only if you are having convergence issues
+reference-frame time	# type of reference frame to use (time/space)
+rtol 1e-08	# relative convergence tolerance
+atol 1e-08	# absolute convergence tolerance
+stol 1e-08	# convergence tolerance in terms of the norm of the change in the solution between steps
+velocity-solve false	# solve for velocity increments in implicit Euler (if false, the solve is for position increments)
+viscosity 0	# Dynamic viscosity for the rod
+quasistatic false # update material frame quasistatically
+inftol 1e-08	# infinity norm convergence tolerance
+integrator implicit	# type of integrator to use for the rod
+iterations 20000	# maximum number of iterations for implicit method
