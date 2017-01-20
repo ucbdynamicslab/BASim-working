@@ -212,8 +212,12 @@ Scalar RodBendingForceSym::localEnergy(const vertex_handle& vh)
 
   const Vec2d& kappa = getKappa(vh);
   const Vec2d& kappaBar = getKappaBar(vh);
-
-  return 0.5 / len * (kappa - kappaBar).dot(B * (kappa - kappaBar));
+    
+  // For dual curvature simulation
+  Vec2d kappaBarEffective = kappaBar;
+  if (m_rod.getcurrentTime() > m_rod.getswitchTime())
+      kappaBarEffective = Vec2d(m_rod.getkappaBarSwitch1(vh), m_rod.getkappaBarSwitch2(vh));
+  return 0.5 / len * (kappa - kappaBarEffective).dot(B * (kappa - kappaBarEffective));
 }
 
 void RodBendingForceSym::globalForce(VecXd& force)
@@ -245,8 +249,12 @@ void RodBendingForceSym::localForce(VecXd& force, const vertex_handle& vh)
 
   const Vec2d& kappa = getKappa(vh);
   const Vec2d& kappaBar = getKappaBar(vh);
-
-  force = -1.0/len * getGradKappa(vh) * B * (kappa - kappaBar);
+  
+  // For dual curvature simulation
+  Vec2d kappaBarEffective = kappaBar;
+  if (m_rod.getcurrentTime() > m_rod.getswitchTime())
+      kappaBarEffective = Vec2d(m_rod.getkappaBarSwitch1(vh), m_rod.getkappaBarSwitch2(vh));
+  force = -1.0/len * getGradKappa(vh) * B * (kappa - kappaBarEffective);
 }
 
 void RodBendingForceSym::globalJacobian(int baseidx, Scalar scale, MatrixBase& J)
@@ -274,8 +282,13 @@ void RodBendingForceSym::globalJacobian(int baseidx, Scalar scale, MatrixBase& J
 
       localJ = -1.0 / len * gradKappa * B * gradKappa.transpose();
 
+      // For dual curvature simulation
+      Vec2d kappaBarEffective = kappaBar;
+      if (m_rod.getcurrentTime() > m_rod.getswitchTime())
+          kappaBarEffective = Vec2d(m_rod.getkappaBarSwitch1(vh), m_rod.getkappaBarSwitch2(vh));
+        
       const pair<MatXd, MatXd>& hessKappa = getHessKappa(vh);
-      Vec2d temp = -1.0 / len * (kappa - kappaBar).transpose() * B;
+      Vec2d temp = -1.0 / len * (kappa - kappaBarEffective).transpose() * B;
       localJ += temp(0) * hessKappa.first + temp(1) * hessKappa.second;
     }
 
@@ -298,8 +311,11 @@ inline void RodBendingForceSym::localJacobian(MatXd& localJ,
 
   localJ = -1.0 / len * gradKappa * B * gradKappa.transpose();
 
+  // For dual curvature simulation
+  Vec2d kappaBarEffective = kappaBar;
+    
   const pair<MatXd, MatXd>& hessKappa = getHessKappa(vh);
-  Vec2d temp = -1.0 / len * (kappa - kappaBar).transpose() * B;
+  Vec2d temp = -1.0 / len * (kappa - kappaBarEffective).transpose() * B;
   localJ += temp(0) * hessKappa.first + temp(1) * hessKappa.second;
 }
 

@@ -65,10 +65,16 @@ ElasticRod::ElasticRod(int numVertices, bool closed)
   
   add_property(m_bendingStiffnessMultiplier, "bending stiffness multiplier at a vertex", 1.0);
   add_property(m_viscousBendingStiffnessOverride, "viscous bending stiffness at a vertex (overriding the original uniform viscosity if set to non zero)", 0.0);
-
+    
   setupDofIndices();
   
   m_boundaryConditions = NULL;
+
+  // For dual curvature simulation ( mkjawed@andrew.cmu.edu )
+  add_property(currentTime, "currentTime", 0.0);
+  add_property(switchTime, "switch time for natural curvature", 0.0);
+  add_property(m_kappaBarSwitch1, "natural curvature along m1 after swtich", 0.0);
+  add_property(m_kappaBarSwitch2, "natural curvature along m2 after swtich", 0.0);
 }
 
 ElasticRod::~ElasticRod()

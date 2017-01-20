@@ -34,7 +34,7 @@ public:
 
   const Vec2d& getKappaBar(const vertex_handle& vh) const;
   void setKappaBar(const vertex_handle& vh, const Vec2d& kappaBar);
-
+    
   Scalar getRefVertexLength(const vertex_handle& vh) const;
   void setRefVertexLength(const vertex_handle& vh, const Scalar& length);
 

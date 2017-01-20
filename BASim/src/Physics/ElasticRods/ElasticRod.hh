@@ -325,6 +325,35 @@ public:
   void setViscousBendingStiffnessOverride(const vertex_handle & v, Scalar m) { property(m_viscousBendingStiffnessOverride)[v] = m; }
   Scalar getViscousBendingStiffnessOverride(const vertex_handle & v) { return property(m_viscousBendingStiffnessOverride)[v]; }
   
+  // For dual curvature simulation
+  void setswitchTime(Scalar s) {
+    property(switchTime) = s; }
+  Scalar getswitchTime() {
+    return property(switchTime); }
+  void setcurrentTime(Scalar s) {
+    property(currentTime) = s; }
+  Scalar getcurrentTime() {
+    return property(currentTime); }
+    
+  const Scalar& getkappaBarSwitch1(const vertex_handle& v) const {
+      return property(m_kappaBarSwitch1)[v]; }
+  void setkappaBarSwitch1(const vertex_handle& v, const Scalar& k1) {
+      property(m_kappaBarSwitch1)[v] = k1; }
+  const Scalar& getkappaBarSwitch1(int v) const {
+      return property(m_kappaBarSwitch1)[v]; }
+  void setkappaBarSwitch1(int v, const Scalar& k1) {
+      property(m_kappaBarSwitch1)[v] = k1; }
+
+  const Scalar& getkappaBarSwitch2(const vertex_handle& v) const {
+      return property(m_kappaBarSwitch2)[v]; }
+  void setkappaBarSwitch2(const vertex_handle& v, const Scalar& k2) {
+      property(m_kappaBarSwitch2)[v] = k2; }
+  const Scalar& getkappaBarSwitch2(int v) const {
+      return property(m_kappaBarSwitch2)[v]; }
+  void setkappaBarSwitch2(int v, const Scalar& k2) {
+      property(m_kappaBarSwitch2)[v] = k2; }
+
+    
 protected:
 
   /** Computes the mass of an elliptical cylinder, which is the
@@ -374,6 +403,12 @@ protected:
   VPropHandle<Scalar> m_viscousBendingStiffnessOverride;
 
   RodBoundaryCondition* m_boundaryConditions;
+    
+  // For dual curvature simulation
+  VPropHandle<Scalar> m_kappaBarSwitch1; // nat. curvature along m1 after switch
+  VPropHandle<Scalar> m_kappaBarSwitch2; // nat. curvature along m2 after switch
+  ObjPropHandle<Scalar> currentTime; // current time
+  ObjPropHandle<Scalar> switchTime; // time at which switch happens
 };
 
 #include "ElasticRod.inl"
