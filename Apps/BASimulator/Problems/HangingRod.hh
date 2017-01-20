@@ -20,8 +20,11 @@ protected:
     RodTimeStepper* stepper;
     
     Scalar m_curvature; // natural curvature
-    Scalar rps; // rotation per second
-    Scalar dtheta; // angle every dt time
+    Scalar switchTime; // time at which switch happens
     Scalar l; // length
+    
+    Scalar m_curvatureSwitch; // natural curvature after switch
+    std::vector<Vec3d> undeformedSwitch; // nodes of the natural state of the rod (after switch)
+    void computeNaturalCurvatureSwitch(); // compute the natural curvature vectors at each node
 };
 
